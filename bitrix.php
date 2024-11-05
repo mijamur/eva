@@ -90,6 +90,8 @@ class CF7Bitrix24IntegrationPlugin
             $user_login = get_option('cf7_bitrix24_user_login');
             $user_password = get_option('cf7_bitrix24_user_password');
             $custom_field = get_option('cf7_bitrix24_custom_field');
+			
+			$getDomain = $_SERVER['SERVER_NAME'];
 
             // Данные UTM и текущая страница
             $utm_source = sanitize_text_field($posted_data['utm_source'] ?? '');
@@ -118,6 +120,13 @@ class CF7Bitrix24IntegrationPlugin
                             ],
                         ],
 						'COMMENTS' => sanitize_text_field($posted_data['your-message'] ?? ''),
+						'SOURCE_ID' => 'WEB',
+                        'WEB' => Array(
+                        "n0" => Array(
+                            "VALUE" => $getDomain,
+                            "VALUE_TYPE" => "WORK",
+                        ),
+                        ),
                         'UTM_SOURCE' => $utm_source,
                         'UTM_MEDIUM' => $utm_medium,
                         'UTM_CAMPAIGN' => $utm_campaign,
